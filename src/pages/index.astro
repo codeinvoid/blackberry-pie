@@ -1,72 +1,27 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
+import Login from "../components/Login.svelte";
+import Ticket from "../components/Ticket.svelte";
+import Layout from "../layouts/Layout.astro";
 
-const errors = { username: "" };
-if (Astro.request.method === "POST") {
-  try {
-    const data = await Astro.request.formData();
-    const name = data.get("username");
-	if (typeof name !== "string" || name.length !== 6) {
-      errors.username += "请输入正确的验证ID";
-    }
-	const hasErrors = Object.values(errors).some(msg => msg)
-	if(!hasErrors) {
-
-		return Astro.redirect("/report");
-	}
-  } catch (error) {
-    if (error instanceof Error) {
-      console.error(error.message);
-    }
-  }
-}
+let login: boolean = true;
 ---
-<meta charset="utf-8"/>
-<ViewTransitions />
-<img src="logo-l.svg" class="w-33.7 h-17 m-5">
-<div class="ablur w-45% border-rd-5.5 border-1 border-solid p-12 m-auto">
-		<h1 class="m-2">RSN 问题反馈</h1>
-		<form method="POST">
-		<label class="text-[#212121] font-LXGW text-6 font-not-italic font-400 lh-normal m-2">
-			游戏 ID
-		</label>
-		<br />
-		<input type="text" name="minecraft" required maxlength="16" minlength="3" class="w-100% h-14.75 border-rd-3 border-2 border-solid border-[#000] bg-[#FFF] p-2 m-2" />
-		<label class="text-[#212121] font-LXGW text-6 font-not-italic font-400 lh-normal m-2">
-			验证 ID (6位)
-		</label>
-		<br />
-		<input type="text" name="username" required maxlength="6" minlength="6" class="w-100% h-14.75 border-rd-3 border-2 border-solid border-[#000] bg-[#FFF] p-2 m-2" />
-		<button class="flex h-12 px-6 py-3 justify-between items-center self-stretch border-rd-3 bg-[#000] text-[#FFF] m-2">下一步</button>
-		</form>
-		
-		{errors.username && <p class="text-red">{errors.username}</p>}
-		<iframe id="fraSubmit" name="fraSubmit" style="display:none;"></iframe>
-</div>
-<br />
-<footer class="m-auto m-0 text-center">
-	本页面暂时只支持电脑端<br />Copyright © 2023 ProjectRTSN
-</footer>
+
+<Layout title="反馈 | ProjectRTSN">
+  <img src="logo-l.svg" class="w-33.7 h-17 m-5 pointer-events-none select-none" />
+  <div class="ablur w-45% border-rd-5.5 border-1 border-solid p-12 m-auto">
+    <h1 class="m-2">RSN 问题反馈</h1>
+    {login ? <Login client:load /> : <Ticket client:load />}
+  </div>
+
+  <footer class="m-auto m-0 text-center m-t-10">
+    本页面暂时只支持电脑端<br />Copyright © 2023 ProjectRTSN
+  </footer>
+</Layout>
+
 <style>
-	:root {
-	--purple-hsl: 255, 60%, 60%;
-	--overlay-blurple: hsla(var(--purple-hsl), 0.2);
-	}
-
-	:root[data-theme='light'] {
-		--purple-hsl: 255, 85%, 65%;
-	}
-
-	html {
-		background:
-			radial-gradient(var(--overlay-blurple), transparent 40%) no-repeat -60vw -40vh / 105vw 200vh,
-			radial-gradient(var(--overlay-blurple), transparent 65%) no-repeat 50% calc(100% + 20rem) /
-				60rem 30rem;
-	}
-
-	.ablur {
-		background-color: transparent;
-		-webkit-backdrop-filter: blur(16px);
-		backdrop-filter: blur(16px);
-	}
+  .ablur {
+    background-color: transparent;
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
+  }
 </style>

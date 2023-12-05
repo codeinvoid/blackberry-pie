@@ -2,6 +2,7 @@
   "name": "rsnreport",
   "type": "module",
   "version": "0.0.1",
+  "license": "UNLICENSED",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
@@ -11,7 +12,9 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.3.1",
+    "@astrojs/svelte": "^4.0.4",
     "astro": "^3.6.4",
+    "svelte": "^5.0.0-next.1",
     "typescript": "^5.3.2"
   },
   "devDependencies": {
