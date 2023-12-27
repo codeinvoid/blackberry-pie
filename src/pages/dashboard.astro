@@ -1,16 +1,21 @@
 ---
-import Login from "../components/Login.svelte";
-import Ticket from "../components/Ticket.svelte";
 import Layout from "../layouts/Layout.astro";
-
-let login: boolean = false;
+import History from "../components/History.svelte"
 ---
 
-<Layout title="反馈 | ProjectRTSN">
-  <img src="logo-l.svg" class="w-33.7 h-17 m-5 pointer-events-none select-none" />
+<Layout title="反馈面板 | ProjectRTSN">
+  <img
+    src="logo-l.svg"
+    class="w-33.7 h-17 m-5 pointer-events-none select-none"
+  />
   <div class="ablur w-45% border-rd-5.5 border-1 border-solid p-12 m-auto">
     <h1 class="m-2">RSN 问题反馈</h1>
-    {login ? <Login client:load /> : <Ticket client:load />}
+    <label
+      class="text-[#212121] font-LXGW text-6 font-not-italic font-400 lh-normal m-2"
+    >
+      历史反馈
+    </label>
+    <History />
   </div>
 
   <footer class="m-auto m-0 text-center m-t-10">

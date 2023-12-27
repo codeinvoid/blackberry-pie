@@ -14,11 +14,14 @@
     "@astrojs/check": "^0.3.1",
     "@astrojs/svelte": "^4.0.4",
     "@astrojs/vercel": "^5.2.0",
+    "@iconify-json/tabler": "^1.1.102",
     "astro": "^3.6.4",
     "svelte": "^5.0.0-next.1",
     "typescript": "^5.3.2"
   },
   "devDependencies": {
+    "@iconify-json/mdi": "^1.1.63",
+    "@unocss/preset-icons": "^0.58.0",
     "@unocss/reset": "^0.58.0",
     "unocss": "^0.58.0",
     "unocss-preset-animations": "^1.0.1"

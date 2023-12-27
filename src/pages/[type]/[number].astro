@@ -1,0 +1,31 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const { type, number } = Astro.params;
+
+const pages = [
+  {
+    type: 'advice'
+  },
+  {
+    type: 'bug'
+  },
+  {
+    type: 'report'
+  }
+];
+
+const types = pages.find((page) => page.type === type);
+if (!types) return Astro.redirect("/404");
+---
+
+<Layout title="反馈 | ProjectRTSN">
+    <img src="../logo-l.svg" class="w-33.7 h-17 m-5 pointer-events-none select-none" />
+    <div class="ablur w-45% border-rd-5.5 border-1 border-solid p-12 m-auto">
+      <h1 class="m-2">RSN 问题反馈</h1>
+      <h1 class="m-2">{type}: {number}</h1>
+    </div>
+  
+    <footer class="m-auto m-0 text-center m-t-10">
+      本页面暂时只支持电脑端<br />Copyright © 2023 ProjectRTSN
+    </footer>
+</Layout>

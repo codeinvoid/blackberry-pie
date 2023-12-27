@@ -11,11 +11,6 @@ import Account from './Account.svelte';
     // });
     // const data = await response.json();
     // responseMessage = data.message;
-    if (formData.get("type") === "none") {
-        responseMessage = "请选择一项";
-    } else {
-        responseMessage = "";
-    }
     // if (response.status == 200) {
     //   document.cookie = "token=" + responseMessage + ";";
     // }
@@ -29,35 +24,18 @@ import Account from './Account.svelte';
 </label>
 <Account />
 <br />
-<form
-  on:submit={submit}
-  method="post"
-  enctype="multipart/form-data"
-  target="niframe"
->
   <label
     class="text-[#212121] font-LXGW text-6 font-not-italic font-400 lh-normal m-2"
   >
     反馈类型
   </label>
-  <select
-    name="type"
-    id="type"
-    class="w-100% h-14.75 border-rd-3 border-2 border-solid border-[#000] bg-[#FFF] p-2 m-2"
-  >
-    <option value="none">请选择</option>
-    <option value="report">举报</option>
-    <option value="bug">错误</option>
-    <option value="advice">建议</option>
-  </select>
-  <button
-    class="flex h-12 px-6 py-3 justify-between items-center self-stretch border-rd-3 bg-[#000] text-[#FFF] m-2"
-    >下一步</button
-  >
-  {#if responseMessage}
-    <p class="text-red">{responseMessage}</p>
-  {/if}
-</form>
+  <div class="flex w-100% h-100% z-0 bg-transparent justify-around p-t-5">
+    <a href="./type/bug"><button class="transition-all h-35 w-35 border-rd-5 border-1 border-solid text-[#000] m-2 hover:scale-110 hover:bg-#F5F4FF bg-#ECE2FF"><div class="i-tabler-bug m-auto text-4xl" />程序错误</button></a>
+    <a href="./type/advice"><button class="transition-all h-35 w-35 border-rd-5 border-1 border-solid text-[#000] m-2 hover:scale-110 hover:bg-#F5F4FF bg-#ECE2FF"><div class="i-tabler-directions m-auto text-4xl" />反馈建议</button></a>
+    <a href="./type/report"><button class="transition-all h-35 w-35 border-rd-5 border-1 border-solid text-[#000] m-2 hover:scale-110 hover:bg-#F5F4FF bg-#ECE2FF"><div class="i-tabler-alert-triangle m-auto text-4xl" />玩家举报</button></a>
+  </div>
+
+  <a href="./dashboard"><button class="p-t-5 text-[#000] m-2 m-b-5 border-solid border-b-2">历史反馈</button></a>
 
 <style>
 </style>
