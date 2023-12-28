@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-const { type, number } = Astro.params;
+const { type, uuid } = Astro.params;
 
 const pages = [
   {
@@ -16,13 +16,30 @@ const pages = [
 
 const types = pages.find((page) => page.type === type);
 if (!types) return Astro.redirect("/404");
+
+const response = await fetch("http://127.0.0.1:3000/api/graphql",
+  {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      query: `
+        query getReports ($id:ID!) {
+          type: ${type}
+          
+        }
+      `,
+      variables: {
+        id: "ZmlsbXM6MQ==",
+      },
+    }),
+  });
 ---
 
 <Layout title="反馈 | ProjectRTSN">
-    <img src="../logo-l.svg" class="w-33.7 h-17 m-5 pointer-events-none select-none" />
+    <img src="../logo-l.svg" class="w-33.7 h-17 m-5 pointer-events-none select-none" alt="ProjectRTSN"/>
     <div class="ablur w-45% border-rd-5.5 border-1 border-solid p-12 m-auto">
       <h1 class="m-2">RSN 问题反馈</h1>
-      <h1 class="m-2">{type}: {number}</h1>
+      <h1 class="m-2">{type}: {uuid}</h1>
     </div>
   
     <footer class="m-auto m-0 text-center m-t-10">
